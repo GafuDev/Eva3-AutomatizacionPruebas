@@ -32,6 +32,7 @@ pipeline {
         stage('Publish to Artifactory') {
             steps {
                 script {
+                    def authHeader = "Authorization: Bearer ${ARTIFACTORY_TOKEN}"
                     def uploadSpec = """{
                         "files": [
                             {
@@ -40,23 +41,18 @@ pipeline {
                             }
                         ]
                     }"""
-
                     def uploadUrl = "${ARTIFACTORY_URL}/api/storage/${ARTIFACTORY_REPO}"
-                    def authHeader = "Bearer ${ARTIFACTORY_TOKEN}"
                     
-                    bat '''
+                    bat """
                         @echo off
                         setlocal
-                        set "CURL_COMMAND=curl -X PUT -H "Authorization: %AUTH_HEADER%" -T %UPLOAD_SPEC% %UPLOAD_URL%"
-                        set "AUTH_HEADER=%ARTIFACTORY_TOKEN%"
-                        set "UPLOAD_SPEC=%uploadSpec%"
-                        set "UPLOAD_URL=%uploadUrl%"
-                        
+                        set CURL_COMMAND=curl -X PUT -H "${authHeader}" -T "${uploadSpec}" "${uploadUrl}"
                         %CURL_COMMAND%
-                    '''
+                    """
                 }
             }
         }
     }
 }
+
 
