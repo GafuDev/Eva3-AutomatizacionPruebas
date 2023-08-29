@@ -33,21 +33,12 @@ pipeline {
             steps {
                 script {
                     def authHeader = "Authorization: Bearer ${ARTIFACTORY_TOKEN}"
-                    def uploadSpec = """{
-                        "files": [
-                            {
-                                "pattern": "target/*.war",
-                                "target": "${ARTIFACTORY_REPO}/"
-                            }
-                        ]
-                    }"""
-                    def uploadUrl = "${ARTIFACTORY_URL}/api/storage/${ARTIFACTORY_REPO}"
+                    def uploadSpec = '{ "files": [ { "pattern": "target/*.war", "target": "' + ARTIFACTORY_REPO + '/" } ] }'
+                    def uploadUrl = "${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}"
                     
                     bat """
-                        @echo off
-                        setlocal
-                        set CURL_COMMAND=curl -X PUT -H "${authHeader}" -T "${uploadSpec}" "${uploadUrl}"
-                        %CURL_COMMAND%
+                        echo ${uploadSpec} > uploadSpec.json
+                        curl -X PUT -H "${authHeader}" -H "Content-Type: application/json" -d @uploadSpec.json "${uploadUrl}"
                     """
                 }
             }
