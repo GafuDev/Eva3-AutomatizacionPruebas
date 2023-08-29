@@ -23,13 +23,13 @@ pipeline {
             }
         }
 
-         stage('Publish to Artifactory') {
+        stage('Publish to Artifactory') {
             steps {
                 script {
                     // Crear el servidor Artifactory
-                    def server = Artifactory.newServer(
-                        serverId: 'evaluacionTres',
-                        url: 'https://jfrogiplacex.jfrog.io',
+                    def server = Artifactory.server(
+                        id: 'evaluacionTres',
+                        url: 'https://jfrogiplacex.jfrog.io/artifactory/api/maven/evaluacion_tres-libs-snapshot',
                         credentialsId: 'jenkins'
                     )
                     
@@ -45,5 +45,7 @@ pipeline {
                     server.upload(uploadSpec)
                 }
             }
+        }
     }
 }
+
