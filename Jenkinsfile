@@ -4,7 +4,7 @@ pipeline {
     environment {
         ARTIFACTORY_URL = 'https://jfrogiplacex.jfrog.io/artifactory'
         ARTIFACTORY_REPO = 'evaluacion_tres-libs-snapshot'
-        ARTIFACTORY_TOKEN = 'cmVmdGtuOjAxOjE3MjQ4MTE4OTI6dHNnSVJpN0JXM3NrV2xQSldlTUxodGhENjla'
+        ARTIFACTORY_TOKEN = 'cmVmdGtuOjAxOjE3MjQ4MTI3NTQ6VWhKelo5Yjl5UHNmYzh1UEh4V1Y3M2Fqc3BN'
     }
     
     stages {
