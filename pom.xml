@@ -76,11 +76,12 @@
     </build>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>a0qwha98cjavf-artifactory-primary-0-snapshots</name>
-            <url>https://jfrogiplacex.jfrog.io/artifactory/webapp-github-libs-snapshot</url>
-        </snapshotRepository>
-    </distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>a0qwha98cjavf-artifactory-primary-0-releases</name>
+			<url>
+				https://jfrogiplacex.jfrog.io/artifactory/evaluacion_tres-libs-release</url>
+		</repository>
+	</distributionManagement>
 </project>
 
